@@ -55,7 +55,13 @@ export default class App extends React.Component {
     return (
       <List>
         {equipos.map(equipo => (
-          <ListItem key={equipo.id} title={equipo.nombre} />
+          <ListItem
+            roundAvatar
+            avatar={{ uri: equipo.logo }}
+            key={equipo.id}
+            title={equipo.nombre}
+            subtitle={String(equipo.estado)}
+          />
         ))}
       </List>
     );
