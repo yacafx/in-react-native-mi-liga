@@ -55,13 +55,20 @@ export default class App extends React.Component {
     };
   }
 
+  toggleTeam() {
+    this.setState({
+      teamVisible: !this.state.teamVisible
+    });
+  }
+
   render() {
     return (
       <View>
-        <Teams equipos={equipos} />
+        <Teams equipos={equipos} onSelectTeam={() => this.toggleTeam()} />
         <Team
           visible={this.state.teamVisible}
           equipo={this.state.selectedTeam}
+          onToggleTeam={() => this.toggleTeam()}
         />
       </View>
     );

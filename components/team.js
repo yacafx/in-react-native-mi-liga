@@ -16,7 +16,11 @@ export class Team extends Component {
             <Text>Jugadores: 0</Text>
             <Text>Estado: {String(this.props.equipo.estado)}</Text>
 
-            <Button backgroundColor="#03A9F4" title="Cerrar vista" />
+            <Button
+              backgroundColor="#03A9F4"
+              title="Cerrar vista"
+              onPress={() => this.props.onToggleTeam()}
+            />
           </Card>
         </View>
       </Modal>
