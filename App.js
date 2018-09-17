@@ -1,6 +1,7 @@
 import React from "react";
-import { Modal, View } from "react-native";
+import { View } from "react-native";
 import { Teams } from "./components/teams";
+import { Team } from "./components/team";
 
 const equipos = [
   {
@@ -49,7 +50,8 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      teamVisible: true
+      teamVisible: false,
+      selectedTeam: {}
     };
   }
 
@@ -57,7 +59,10 @@ export default class App extends React.Component {
     return (
       <View>
         <Teams equipos={equipos} />
-        <Modal animationType="slide" visible={this.state.teamVisible} />
+        <Team
+          visible={this.state.teamVisible}
+          equipo={this.state.selectedTeam}
+        />
       </View>
     );
   }
