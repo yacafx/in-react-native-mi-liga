@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { List, ListItem } from "react-native-elements";
 import { Teams } from "./components/teams";
 
 const equipos = [
@@ -46,8 +45,8 @@ const equipos = [
 ];
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {};
   }
@@ -55,18 +54,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-        <List>
-          {equipos.map(equipo => (
-            <ListItem
-              roundAvatar
-              avatar={{ uri: equipo.logo }}
-              key={equipo.id}
-              title={equipo.nombre}
-              subtitle={String(equipo.estado)}
-            />
-          ))}
-        </List>
-        <Teams />
+        <Teams equipos={equipos} />
       </View>
     );
   }
