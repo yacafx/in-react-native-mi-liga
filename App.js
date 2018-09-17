@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { List, ListItem } from "react-native-elements";
+import { Teams } from "./components/teams";
 
 const equipos = [
   {
@@ -53,17 +54,20 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <List>
-        {equipos.map(equipo => (
-          <ListItem
-            roundAvatar
-            avatar={{ uri: equipo.logo }}
-            key={equipo.id}
-            title={equipo.nombre}
-            subtitle={String(equipo.estado)}
-          />
-        ))}
-      </List>
+      <View>
+        <List>
+          {equipos.map(equipo => (
+            <ListItem
+              roundAvatar
+              avatar={{ uri: equipo.logo }}
+              key={equipo.id}
+              title={equipo.nombre}
+              subtitle={String(equipo.estado)}
+            />
+          ))}
+        </List>
+        <Teams />
+      </View>
     );
   }
 }
