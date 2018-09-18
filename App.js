@@ -71,7 +71,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={{ marginTop: 22, backgroundColor: "red" }}>
+      <View style={{ marginTop: 22 }}>
         <Teams
           equipos={equipos}
           onSelectTeam={equipo => this.displayTeam(equipo)}
