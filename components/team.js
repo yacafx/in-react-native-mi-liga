@@ -29,6 +29,7 @@ export class Team extends Component {
             <Text>Estado: {String(this.props.equipo.estado)}</Text>
 
             <Button
+              icon={{ name: "ios-football", type: "ionicon" }}
               backgroundColor="#03A9F4"
               title="Cerrar vista"
               onPress={() => this.props.onToggleTeam()}
