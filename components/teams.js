@@ -1,7 +1,6 @@
 import React, { Component } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { List, ListItem } from "react-native-elements";
-
-import { Text } from "react-native";
 
 export class Teams extends Component {
   render() {
@@ -13,7 +12,14 @@ export class Teams extends Component {
             avatar={{ uri: equipo.logo }}
             key={equipo.id}
             title={equipo.nombre}
-            subtitle={String(equipo.estado)}
+            subtitle={
+              <View
+                style={[
+                  styles.circle,
+                  equipo.estado ? styles.active : styles.inactive
+                ]}
+              />
+            }
             onPress={() => this.props.onSelectTeam(equipo)}
           />
         ))}
@@ -21,3 +27,19 @@ export class Teams extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  circle: {
+    width: 60,
+    height: 10,
+    marginTop: 5,
+    marginLeft: 12,
+    borderRadius: 50
+  },
+  active: {
+    backgroundColor: "green"
+  },
+  inactive: {
+    backgroundColor: "gray"
+  }
+});
