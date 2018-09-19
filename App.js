@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert, NetInfo, Vibration, View } from "react-native";
+import { Button } from "react-native-elements";
 import { Teams } from "./components/teams";
 import { Team } from "./components/team";
 
@@ -65,6 +66,17 @@ export default class App extends React.Component {
     });
   }
 
+  displayNetworkInfo() {
+    NetInfo.getConnectionInfo().then(connectionInfo => {
+      Alert.alert(
+        "Tipo de conexión " +
+          connectionInfo.type +
+          ", EffectiveConnectionType: " +
+          connectionInfo.effectiveType
+      );
+    });
+  }
+
   toggleTeam() {
     Vibration.vibrate([1000, 2000, 3000]);
     this.setState({
@@ -90,6 +102,13 @@ export default class App extends React.Component {
           visible={this.state.teamVisible}
           equipo={this.state.selectedTeam}
           onToggleTeam={() => this.toggleTeam()}
+        />
+        <Button
+          style={{ marginTop: 20 }}
+          icon={{ name: "ios-wifi", type: "ionicon" }}
+          backgroundColor="#4CAF50"
+          title="Mostrar información de red"
+          onPress={() => this.displayNetworkInfo()}
         />
       </View>
     );
