@@ -91,6 +91,16 @@ export default class App extends React.Component {
     this.toggleTeam();
   }
 
+  saveData() {
+    NetInfo.isConnected.fetch().then(isConnected => {
+      if (isConnected) {
+        Alert.alert("Datos enviados");
+      } else {
+        Alert.alert("Verifica tu conexión");
+      }
+    });
+  }
+
   render() {
     return (
       <View style={{ marginTop: 22 }}>
@@ -109,6 +119,14 @@ export default class App extends React.Component {
           backgroundColor="#4CAF50"
           title="Mostrar información de red"
           onPress={() => this.displayNetworkInfo()}
+        />
+
+        <Button
+          style={{ marginTop: 20 }}
+          icon={{ name: "ios-send", type: "ionicon" }}
+          backgroundColor="#17a2b8"
+          title="Enviar datos"
+          onPress={() => this.saveData()}
         />
       </View>
     );
