@@ -1,5 +1,5 @@
 import React from "react";
-import { Vibration, View } from "react-native";
+import { Alert, NetInfo, Vibration, View } from "react-native";
 import { Teams } from "./components/teams";
 import { Team } from "./components/team";
 
@@ -53,6 +53,16 @@ export default class App extends React.Component {
       teamVisible: false,
       selectedTeam: {}
     };
+  }
+
+  componentDidMount() {
+    NetInfo.addEventListener("connectionChange", connectionInfo => {
+      if (connectionInfo.type == "none" || connectionInfo.type == "unknown") {
+        Alert.alert("Dispositivo sin conexión a Internet");
+      } else {
+        Alert.alert("Conectado a Internet vía " + connectionInfo.type);
+      }
+    });
   }
 
   toggleTeam() {
