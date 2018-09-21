@@ -53,7 +53,8 @@ export default class App extends React.Component {
     this.state = {
       teamVisible: false,
       selectedTeam: {},
-      offline: true
+      offline: true,
+      equipos: equipos
     };
   }
 
@@ -64,7 +65,7 @@ export default class App extends React.Component {
       });
 
       if (isConnected) {
-        Alert.alert("Conectado a Internet");
+        // Alert.alert("Conectado a Internet");
       } else {
         Alert.alert("Dispositivo sin conexión a Internet");
       }
@@ -104,13 +105,24 @@ export default class App extends React.Component {
     this.toggleTeam();
   }
 
-  saveData() {
+  getData() {
     NetInfo.isConnected.fetch().then(isConnected => {
       if (isConnected) {
-        Alert.alert("Datos enviados");
+        // Alert.alert("Datos enviados");
+        this.getRemoteTeams();
       } else {
         Alert.alert("Verifica tu conexión");
       }
+    });
+  }
+
+  async getRemoteTeams() {
+    let response = await fetch("https://api-mi-liga.now.sh/api/equipos");
+
+    let responseJson = await response.json();
+
+    this.setState({
+      equipos: responseJson
     });
   }
 
@@ -118,7 +130,7 @@ export default class App extends React.Component {
     return (
       <View style={{ marginTop: 22 }}>
         <Teams
-          equipos={equipos}
+          equipos={this.state.equipos}
           onSelectTeam={equipo => this.displayTeam(equipo)}
         />
         <Team
@@ -136,10 +148,10 @@ export default class App extends React.Component {
 
         <Button
           style={{ marginTop: 20 }}
-          icon={{ name: "ios-send", type: "ionicon" }}
+          icon={{ name: "ios-download", type: "ionicon" }}
           backgroundColor="#17a2b8"
-          title="Enviar datos"
-          onPress={() => this.saveData()}
+          title="Obtener equipos"
+          onPress={() => this.getData()}
           disabled={this.state.offline}
         />
       </View>
